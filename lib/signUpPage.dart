@@ -22,7 +22,16 @@ class _signupState extends State<signUpPage> {
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
-      print(userCredential.user!.uid); //to print uid
+      // for email verification
+      await userCredential.user!.sendEmailVerification();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Verification email sent! Please check your inbox."),
+        ),
+      );
+
+      // print(userCredential.user!.uid);    To print uid
     } on FirebaseAuthException catch (e) {
       print(e.message);
       print(e.code);

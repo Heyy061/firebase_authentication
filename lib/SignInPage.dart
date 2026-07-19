@@ -15,6 +15,13 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   Future<void> LoginUserByEmail() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -22,6 +29,7 @@ class _SignInPageState extends State<SignInPage> {
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
+      print("Successfully Login Welcome Back ");
     } on FirebaseAuthException catch (e) {
       print(e.message);
     }
@@ -50,7 +58,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   SizedBox(height: 1),
-                  Text("Sign  In to continue"),
+                  Text("Sign In to continue"),
 
                   //////////////////////////////////////////////
                   SizedBox(height: 22),
@@ -86,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Text(
-                          "Already have an account?",
+                          "Create a new account",
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight(500),
