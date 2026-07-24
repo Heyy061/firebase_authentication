@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:signup/SignInPage.dart' show SignInPage;
+import 'package:signup/via.dart';
 import 'boxes.dart' show Boxes;
 
 class signUpPage extends StatefulWidget {
@@ -37,7 +38,12 @@ class _signupState extends State<signUpPage> {
       print(e.code);
     }
   }
+/// Sign up with google
+Future<void>signUpWithGoogle() async{
+  await
 
+}
+///////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +53,7 @@ class _signupState extends State<signUpPage> {
             elevation: 10,
             child: SizedBox(
               width: 320,
-              height: 480,
+              height: 580,
               child: Column(
                 children: [
                   Padding(
@@ -61,7 +67,7 @@ class _signupState extends State<signUpPage> {
                     ),
                   ),
                   SizedBox(height: 1),
-                  Text("Sign  up to continue"),
+                  Text("Sign up to continue"),
 
                   ////////////////////////////////////////////////////////
                   SizedBox(height: 22),
@@ -91,7 +97,7 @@ class _signupState extends State<signUpPage> {
                     ),
                   ),
 
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Padding(
@@ -123,6 +129,14 @@ class _signupState extends State<signUpPage> {
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Via(icon1: Icons.g_mobiledata_sharp, name1: "GOOGLE"),
+                      SizedBox(width: 1),
+                      Via(icon1: Icons.contact_page_outlined, name1: "NUMBER"),
                     ],
                   ),
                 ],

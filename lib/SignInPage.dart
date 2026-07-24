@@ -34,6 +34,23 @@ class _SignInPageState extends State<SignInPage> {
       print(e.message);
     }
   }
+///Froget password 
+  Future<void> resePassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.text.trim(),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Password reset email sent!")),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Something went wrong")),
+      );
+      print(e.code);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +82,23 @@ class _SignInPageState extends State<SignInPage> {
                   Boxes(hintText: "Email Id", x: emailController),
                   SizedBox(height: 16),
                   Boxes(hintText: "Password", x: passwordController),
-                  /////////////////////////////////////////////////
-                  SizedBox(height: 16),
 
+                  /////////////////////////////////////////////////
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        resePassword();
+                      },
+                      style: TextButton.styleFrom(
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text("Froget Password"),
+                    ),
+                  ),
+
+                  SizedBox(height: 12),
                   SizedBox(
                     width: 150,
                     child: ElevatedButton(
@@ -88,7 +119,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
 
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Padding(
