@@ -11,7 +11,6 @@ class signUpPage extends StatefulWidget {
   State<signUpPage> createState() => _signUpState();
 }
 
-
 class _signUpState extends State<signUpPage> {
   // Sign up with google
   Future<void> signUpWithGoogle() async {}
@@ -79,7 +78,23 @@ class _signUpState extends State<signUpPage> {
                     ),
                   ),
 
+                  SizedBox(height: 25),
+                  Row(
+                    children: [
+                      Via(
+                        icon1: Icons.g_mobiledata_sharp,
+                        name1: "GOOGLE",
+                        onPress: () async {
+                          await signUpWithGoogle();
+                        },
+                      ),
+                     // SizedBox(width: 1),
+                      //Via(icon1: Icons.contact_page_outlined, name1: "NUMBER"),
+                    ],
+                  ),
+////////////////////////////////////////////////////////////////////////////////////////////////
                   SizedBox(height: 20),
+
                   Row(
                     children: [
                       Padding(
@@ -113,14 +128,6 @@ class _signUpState extends State<signUpPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Via(icon1: Icons.g_mobiledata_sharp, name1: "GOOGLE"),
-                      SizedBox(width: 1),
-                      Via(icon1: Icons.contact_page_outlined, name1: "NUMBER"),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -130,3 +137,4 @@ class _signUpState extends State<signUpPage> {
     );
   }
 }
+//
