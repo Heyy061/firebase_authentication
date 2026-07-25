@@ -8,42 +8,15 @@ class signUpPage extends StatefulWidget {
   const signUpPage({super.key});
 
   @override
-  State<signUpPage> createState() => _signupState();
+  State<signUpPage> createState() => _signUpState();
 }
 
-class _signupState extends State<signUpPage> {
-  //To input email,password in textfield
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
-  Future<void> createUserByEmail() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
-          );
-      // for email verification
-      await userCredential.user!.sendEmailVerification();
+class _signUpState extends State<signUpPage> {
+  // Sign up with google
+  Future<void> signUpWithGoogle() async {}
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Verification email sent! Please check your inbox."),
-        ),
-      );
-
-      // print(userCredential.user!.uid);    To print uid
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      print(e.code);
-    }
-  }
-/// Sign up with google
-Future<void>signUpWithGoogle() async{
-  await
-
-}
-///////////////////////////////////
+  ///////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +55,15 @@ Future<void>signUpWithGoogle() async{
                     child: ElevatedButton(
                       onPressed: () async {
                         await createUserByEmail();
+                        print("Sign Up completed");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "Verification email sent! Please check your inbox.",
+                            ),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
                       },
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(

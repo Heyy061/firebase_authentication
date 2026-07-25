@@ -1,4 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart'
+    show FirebaseAuth, UserCredential, FirebaseAuthException, GoogleAuthProvider;
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart' show GoogleSignInAuthentication, GoogleSignInAccount, GoogleSignIn;
+
+//To input email,password in textfield
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+
+Future<void> createUserByEmail() async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+    // for email verification
+    await userCredential.user!.sendEmailVerification();
+ 
+    // print(userCredential.user!.uid);    To print uid
+  } on FirebaseAuthException catch (e) {
+    print(e.message);
+    print(e.code);
+  }
+}
+/////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////
 
 class Via extends StatelessWidget {
   final IconData icon1;
@@ -21,7 +48,12 @@ class Via extends StatelessWidget {
             ),
             child: Column(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(icon1, size: 50)),
+                IconButton(
+                  onPressed: () async {
+                    
+                  },
+                  icon: Icon(icon1, size: 50),
+                ),
                 Text(name1),
               ],
             ),
