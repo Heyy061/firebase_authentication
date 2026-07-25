@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart'
     show
         FirebaseAuth,
-        UserCredential,
         FirebaseAuthException,
-        GoogleAuthProvider;
+        GoogleAuthProvider,
+        PhoneAuthCredential,
+        UserCredential;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart'
     show GoogleSignInAuthentication, GoogleSignInAccount, GoogleSignIn;
@@ -52,8 +54,23 @@ Future<UserCredential?> signUpWithGoogle() async {
     return null;
   }
 }
-//////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////
+Future<void> signUpWithPhoneNumber() async {
+  await FirebaseAuth.instance.verifyPhoneNumber(
+    verificationCompleted: (PhoneAuthCredential credential) async {
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    },
+    verificationFailed: (FirebaseAuthException e) {
+      print(e.message);
+    },
+
+    codeSent: (String verificationId, int? resendToken) {},
+    codeAutoRetrievalTimeout: (String verificationId) {},
+  );
+}
+
+/////////////////////////////////////////////////////////////////
 class Via extends StatelessWidget {
   final IconData icon1;
   final String name1;

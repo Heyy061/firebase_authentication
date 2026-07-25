@@ -88,11 +88,17 @@ class _signUpState extends State<signUpPage> {
                           await signUpWithGoogle();
                         },
                       ),
-                     // SizedBox(width: 1),
-                      //Via(icon1: Icons.contact_page_outlined, name1: "NUMBER"),
+                      SizedBox(width: 1),
+                      Via(
+                        icon1: Icons.contact_page_outlined,
+                        name1: "NUMBER",
+                        onPress: () async {
+                          await signUpWithPhoneNumber();
+                        },
+                      ),
                     ],
                   ),
-////////////////////////////////////////////////////////////////////////////////////////////////
+                  ////////////////////////////////////////////////////////////////////////////////////////////////
                   SizedBox(height: 20),
 
                   Row(
