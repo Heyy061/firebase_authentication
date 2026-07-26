@@ -34,7 +34,8 @@ class _SignInPageState extends State<SignInPage> {
       print(e.message);
     }
   }
-///Froget password 
+
+  ///Froget password
   Future<void> resePassword() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
@@ -104,6 +105,9 @@ class _SignInPageState extends State<SignInPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         LoginUserByEmail();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Welcome Back!")),
+                        );
                       },
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(

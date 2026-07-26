@@ -71,7 +71,6 @@ Future<void> signUpWithPhoneNumber(BuildContext context) async {
     verificationFailed: (FirebaseAuthException e) {
       print(e.message);
     },
-
     codeSent: (String verificationId, int? resendToken) {
       Navigator.push(
         context,
