@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:signup/SignInPage.dart' show SignInPage;
+import 'package:signup/phoneNumberPage.dart';
 import 'package:signup/via.dart';
 import 'boxes.dart' show Boxes;
 
@@ -92,8 +93,15 @@ class _signUpState extends State<signUpPage> {
                       Via(
                         icon1: Icons.contact_page_outlined,
                         name1: "NUMBER",
-                        onPress: () async {
-                          await signUpWithPhoneNumber();
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Phonenumberpage();
+                              },
+                            ),
+                          );
                         },
                       ),
                     ],

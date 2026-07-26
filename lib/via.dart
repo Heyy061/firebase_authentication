@@ -4,11 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart'
         FirebaseAuthException,
         GoogleAuthProvider,
         PhoneAuthCredential,
+        PhoneAuthProvider,
         UserCredential;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart'
     show GoogleSignInAuthentication, GoogleSignInAccount, GoogleSignIn;
+import 'package:signup/otpPage.dart';
+import 'package:signup/phoneNumberPage.dart';
 
 //To input email,password in textfield
 final TextEditingController emailController = TextEditingController();
@@ -56,8 +59,12 @@ Future<UserCredential?> signUpWithGoogle() async {
 }
 
 //////////////////////////////////////////////////////////////////
-Future<void> signUpWithPhoneNumber() async {
+///Sign up with mobile number
+final TextEditingController NumberController = TextEditingController();
+
+Future<void> signUpWithPhoneNumber(BuildContext context) async {
   await FirebaseAuth.instance.verifyPhoneNumber(
+    phoneNumber: "+91${NumberController.text.trim()}",
     verificationCompleted: (PhoneAuthCredential credential) async {
       await FirebaseAuth.instance.signInWithCredential(credential);
     },
@@ -65,10 +72,19 @@ Future<void> signUpWithPhoneNumber() async {
       print(e.message);
     },
 
-    codeSent: (String verificationId, int? resendToken) {},
+    codeSent: (String verificationId, int? resendToken) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => otpPage(verificationId: verificationId),
+        ),
+      );
+    },
     codeAutoRetrievalTimeout: (String verificationId) {},
   );
 }
+
+/////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////
 class Via extends StatelessWidget {
